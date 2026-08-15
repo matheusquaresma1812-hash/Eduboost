@@ -11,7 +11,7 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 function Sidebar({ active, setActive, open, setOpen }) {
   const links = [["Visão geral", LayoutDashboard], ["Minha trilha", Compass], ["Biblioteca", BookOpen], ["Questões", CircleHelp]];
   return <aside className={`sidebar ${open ? "is-open" : ""}`} data-testid="main-sidebar">
-    <div className="brand"><div className="brand-mark"><Sparkles size={18}/></div><span>EduBoost <b>Pro</b></span><button className="mobile-close" onClick={() => setOpen(false)} data-testid="sidebar-close-button"><X size={18}/></button></div>
+    <div className="brand"><div className="brand-mark"><GraduationCap size={19}/></div><span>EduBoost <b>Pro</b></span><button className="mobile-close" onClick={() => setOpen(false)} data-testid="sidebar-close-button"><X size={18}/></button></div>
     <div className="side-label">APRENDER</div>
     <nav>{links.map(([label, Icon]) => <button key={label} className={active === label ? "nav-link active" : "nav-link"} onClick={() => { setActive(label); setOpen(false); }} data-testid={`nav-${label.toLowerCase().replaceAll(" ", "-")}`}><Icon size={18}/><span>{label}</span>{active === label && <span className="nav-dot"/>}</button>)}</nav>
     <div className="side-promo"><div className="promo-icon"><Flame size={18}/></div><strong>Seu ritmo está<br/>pegando fogo!</strong><span>3 dias seguidos estudando</span><div className="streak-bar"><i/></div></div>

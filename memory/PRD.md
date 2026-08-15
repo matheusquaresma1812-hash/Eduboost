@@ -40,3 +40,8 @@ Criar uma plataforma educacional inteligente, adaptativa e organizada do ensino 
 2. Adicionar calendário de trabalhos e provas.
 3. Implementar respostas de questões com pontuação e revisão.
 4. Expandir a biblioteca autoral por matéria e etapa.
+
+## Atualização visual — 15/08/2026
+- Substituída a identidade roxo/lavanda por azul-petróleo e verde-menta em botões, navegação, painéis, destaques e superfícies.
+- Atualizado o símbolo da marca para um ícone de formatura, reforçando o posicionamento educacional.
+- Contraste e responsividade mobile verificados após a mudança.
