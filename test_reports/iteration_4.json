@@ -1,0 +1,32 @@
+{
+  "summary": "Retested the two iteration_3 fixes against the public deployment. Radar POST→GET persisted the new topic with next_due <= now and is_due=true; browser reload kept it under HOJE NO RADAR, and Lembrei moved it to PRÓXIMAS REVISÕES with persisted is_due=false/step=1. Onboarding subject-count validation passed at 0, 1, 2, 4, and attempted 5th selections.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results_iteration_4.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results_iteration_4.xml",
+    "/app/test_reports/iteration_4.json"
+  ],
+  "success_rate": {
+    "backend": "100% (1/1 focused regression test)",
+    "frontend": "100% (2/2 focused regression flows)"
+  },
+  "seed_data_creation": "Created isolated TEST_QA profiles and synthetic Radar topics. Radar records were deleted through the public API; two TEST_QA profile records created by the focused pytest reruns were removed directly from the test Mongo database.",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Both iteration_3 defects are verified fixed on the public deployment. Onboarding: submit disabled with 0/1 subjects, enabled with 2, remained enabled through 4, and an attempted fifth showed the info toast while the hint stayed 4/4. Radar: public API returned next_due <= verification time and is_due=true; the due card survived reload, did not appear in upcoming before review, and Lembrei moved it out of Due while the server persisted step=1/is_due=false.",
+  "rca_of_the_issue": "The fixes address the prior causes: add_revision_topic now persists next_due at current UTC time, and Onboarding now derives submit disabled state from a 2..4 selection predicate while toggleSubject blocks additions beyond four."
+}

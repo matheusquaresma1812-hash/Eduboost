@@ -1,0 +1,67 @@
+{
+  "summary": "Executed 17 public backend API tests and end-to-end Playwright coverage for onboarding, uploads, AI study tools, Feynman helpers, correction, planner, radar, duel, library, and questions. AI and object-storage integrations passed; found two state/validation defects.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "POST /api/revision/topic + GET /api/revision/topics/{session_id}",
+        "issue": "A newly created topic is persisted with next_due one day ahead, so GET immediately returns is_due=false instead of keeping it in HOJE NO RADAR.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Onboarding focus subjects",
+        "issue": "Entrar no EduBoost remains enabled with zero selected subjects and all 12 subjects can be selected, despite the requested minimum of 2 and the UI text saying up to 4.",
+        "selector": "[data-testid=\"onb-submit\"], [data-testid^=\"onb-subject-\"]",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Radar persistence",
+        "issue": "The frontend locally forces is_due=true after adding a topic, but after page reload the backend response makes the unreviewed topic move from HOJE NO RADAR to PRÓXIMAS REVISÕES.",
+        "affected_selectors": [
+          "[data-testid=\"radar-add-button\"]",
+          "[data-testid^=\"radar-due-\"]",
+          "[data-testid^=\"radar-upcoming-\"]"
+        ]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/test_library.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Persist new revision topics as due now; only schedule a future next_due after the first review, then remove the frontend-only is_due override.",
+    "Enforce onboarding focus-subject bounds (minimum 2, maximum 4) and disable submission with an explanatory validation message outside that range.",
+    "Retest Radar across reload and onboarding boundary selections after fixes."
+  ],
+  "critical_code_review_comments": [
+    "storage.py uses synchronous requests calls from async FastAPI handlers, blocking the event loop during object-storage init/upload/download; use an async HTTP client or run the blocking calls in a worker thread.",
+    "Revision due state has two sources of truth: server next_due/is_due and a frontend-created is_due=true override. Derive this state consistently from the backend.",
+    "Planner PATCH and delete endpoints, plus material/revision deletes, do not return 404 for unknown IDs and do not scope mutations by session_id; validate ownership/existence before mutating.",
+    "Onboarding toggleSubject has no subject-count validation even though product copy specifies a maximum and the requested flow requires at least two."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py",
+    "/app/frontend/src/App.js",
+    "/app/frontend/src/components/Sidebar.jsx",
+    "/app/test_reports/pytest/pytest_results.xml",
+    "/app/test_reports/iteration_3.json"
+  ],
+  "success_rate": {
+    "backend": "94% (16/17)",
+    "frontend": "90%"
+  },
+  "seed_data_creation": "Created isolated TEST_/Ana QA profiles, one PNG material, planner task, and radar topics; test material and test profiles were removed after execution, while API CRUD fixtures cleaned their own records.",
+  "should_call_test_agent_after_fix": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "GPT-5.6 Terra text/JSON endpoints and Terra Vision all responded successfully. Study upload persisted to Mongo/object storage and exact bytes downloaded. Planner CRUD/progress, Radar immediate add/review, Duel, Library, Questions, Feynman, and Correction passed. Reproduce Radar defect by adding a topic, reloading, navigating back to Radar: it appears under upcoming without review. One initial Feynman helper automation assertion was corrected to wait beyond the temporary '...gerando' state; the retest passed.",
+  "rca_of_the_issue": "Radar: add_revision_topic stores next_due=next_due(0), which adds one day; list_revision therefore calculates is_due=false. Revision.jsx masks this only in memory with {...data, is_due:true}, so reload exposes the server state. Onboarding: toggleSubject blindly appends/removes values and submit has no count guard or disabled condition."
+}
