@@ -66,6 +66,22 @@ LIBRARY = [
     {"id": "fis-pre", "subject": "Física", "stage": "Pré-vestibular", "color": "violet", "title": "Energia em ação", "description": "Cinemática, dinâmica e energia com aplicações simples e diretas.", "progress": 0, "lessons": 11},
 ]
 
+EXTRA_SUBJECTS = [
+    ("Geografia", "Ciências Humanas", "mapa", "blue", "Territórios e paisagens", "Leia o mundo pelas relações entre espaço, natureza e sociedade."),
+    ("Química", "Ciências da Natureza", "átomo", "mint", "A matéria por dentro", "Descubra átomos, misturas e transformações em situações reais."),
+    ("Filosofia", "Ciências Humanas", "ideia", "violet", "Pensar é investigar", "Perguntas clássicas para construir argumentos mais claros."),
+    ("Sociologia", "Ciências Humanas", "sociedade", "coral", "A vida em coletivo", "Observe cultura, trabalho e desigualdade com olhar crítico."),
+    ("Inglês", "Linguagens", "words", "blue", "English for real life", "Vocabulário e leitura para entender textos do cotidiano."),
+    ("Artes", "Linguagens", "criação", "amber", "Ver, criar e sentir", "Arte, repertório e expressão em diferentes tempos e culturas."),
+    ("Educação Física", "Linguagens", "movimento", "mint", "Corpo em movimento", "Saúde, esporte e consciência corporal para todas as idades."),
+]
+for subject, area, topic, color, title, description in EXTRA_SUBJECTS:
+    for stage, suffix in [("Fundamental 1", "Descobertas"), ("Ensino Médio", "Conexões"), ("ENEM", "Revisão")]:
+        LIBRARY.append({"id": f"{subject.lower().replace(' ', '-')}-{stage.lower().replace(' ', '-')}", "subject": subject, "area": area, "stage": stage, "color": color, "title": f"{title} · {suffix}", "description": description, "progress": 0, "lessons": 8})
+
+for item in LIBRARY:
+    item.setdefault("area", "Matemática" if item["subject"] == "Matemática" else "Linguagens" if item["subject"] in ["Português", "Inglês", "Artes", "Educação Física"] else "Ciências Humanas" if item["subject"] in ["História", "Geografia", "Filosofia", "Sociologia"] else "Ciências da Natureza")
+
 @api_router.get("/library")
 async def get_library(stage: Optional[str] = None, subject: Optional[str] = None):
     items = [item for item in LIBRARY if (not stage or item["stage"] == stage) and (not subject or item["subject"] == subject)]

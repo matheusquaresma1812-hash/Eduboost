@@ -22,7 +22,7 @@ Criar uma plataforma educacional inteligente, adaptativa e organizada do ensino 
 
 ## Implementado — 15/08/2026
 - Dashboard inicial com foco do dia, constância semanal e sugestões.
-- Biblioteca universal com 6 módulos demonstrativos, busca, filtros e progresso.
+- Biblioteca universal com 27 módulos demonstrativos, busca, filtros e progresso.
 - Diagnóstico com seleção de fase, matéria e confiança, integrado à IA.
 - Banco de questões com níveis e tema configuráveis, integrado à IA.
 - Fallback autoral controlado para manter a prática disponível quando o provedor estiver sem orçamento.
@@ -51,3 +51,10 @@ Criar uma plataforma educacional inteligente, adaptativa e organizada do ensino 
 - Superfícies verde-acinzentadas, detalhes verde-menta e botões azul-petróleo aplicados às áreas principais.
 - Alternador claro/noturno incluído no topo da plataforma.
 - Contraste, navegação e ausência de overflow mobile verificados.
+
+## Expansão da biblioteca — 15/08/2026
+- Biblioteca ampliada para 12 matérias e 27 módulos demonstrativos.
+- Adicionados filtros por área, matérias completas e três módulos para cada nova matéria.
+- Busca passou a considerar título, matéria e descrição.
+- Botão Filtros agora leva o aluno diretamente aos filtros de área.
+- Abas de matérias ganharam rolagem horizontal confortável no mobile.
