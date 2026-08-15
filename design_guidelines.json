@@ -1,0 +1,53 @@
+{
+  "app_name": "EduBoost Pro",
+  "description": "Ecossistema de aprendizado inteligente, adaptativo e organizado do ensino fundamental ao vestibular/universitário",
+  "app_type": "hybrid_fullstack",
+  "theme": "light",
+  "typography": {
+    "heading_font": "Plus Jakarta Sans, sans-serif",
+    "body_font": "Inter, sans-serif",
+    "mono_font": "JetBrains Mono, monospace"
+  },
+  "colors": {
+    "primary": "#4F46E5",
+    "primary_hover": "#4338CA",
+    "secondary": "#06B6D4",
+    "accent": "#F59E0B",
+    "background": "#F8FAFC",
+    "surface": "#FFFFFF",
+    "border": "#E2E8F0",
+    "text_main": "#0F172A",
+    "text_muted": "#64748B",
+    "success": "#10B981",
+    "warning": "#F59E0B",
+    "danger": "#EF4444"
+  },
+  "component_path": "/app/frontend/src/components",
+  "instructions_to_main_agent": "Ensure full responsiveness, use React with Tailwind CSS, lucide-react icons, sonner for toasts, and include data-testid attributes on all interactive and informational elements. Follow strict modular component design.",
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You MUST NOT apply universal transition (transition: all).",
+    "Always use modern button styles with hover and focus states.",
+    "Include data-testid on all interactive elements.",
+    "Use sonner for toast notifications.",
+    "Implement gorgeous adaptive layouts with generous spacing and Bento grids."
+  ],
+  "image_urls": [
+    {
+      "category": "hero_library",
+      "url": "https://images.unsplash.com/photo-1537202108838-e7072bad1927?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "description": "Modern library and studying books"
+    },
+    {
+      "category": "students_studying",
+      "url": "https://images.unsplash.com/photo-1636647677481-f134fda3f408?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "description": "Students studying with modern laptops"
+    }
+  ],
+  "features": [
+    "Biblioteca por etapa e matéria (1º Fundamental até Vestibular / ENEM)",
+    "Diagnóstico escolar com IA (GPT-5.6 Terra & Gemini 3 Flash)",
+    "Trilha de estudos personalizada e adaptativa",
+    "Gestor e Planilha de Trabalhos (cronograma, prazos e checklist)",
+    "Banco de Questões com resoluções detalhadas passo a passo"
+  ]
+}
